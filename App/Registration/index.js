@@ -1,11 +1,12 @@
 import React,{Component} from 'react'
 
 import { View } from 'react-native'
+import { connect } from 'react-redux';
 
 import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base';
 
 import { Field,reduxForm  } from 'redux-form'
-
+import { sumbit } from './actions'
 const validate = values =>{
     const error = {};
 
@@ -60,8 +61,9 @@ class Registration extends Component{
         )
     }
 onSubmit = (values)=>{
+    console.log(this.props.form)
     if(Object.keys(values).length>0){
-    console.log(values)
+        this.props.onSubmit(values)
     }
 }
     render(){
@@ -81,13 +83,35 @@ onSubmit = (values)=>{
                     <Button onPress={handleSubmit(this.onSubmit)} >
                         <Text>Submit</Text>
                     </Button>
+                    {this.props.registration.message && <Text>{this.props.registration.message}</Text>}
+                    {this.props.form && <Text>{JSON.stringify(this.props.form.registration)}</Text>}
+                    
               </Content>
           </Container>
       )
     }
 }
 
+mapStateToProps = (state)=>{
+    return{
+        registration:state.registration,
+        regForm:state.form
+    }
+}
+
+mapDispatchToProps = (dispatch)=>{
+    return{
+        onSubmit: (values)=>dispatch(sumbit(values))
+    }
+}
+
+Registration = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Registration)
+
 export default reduxForm({
     form:'registration',
-    validate
+    validate,
+    
 })(Registration)
