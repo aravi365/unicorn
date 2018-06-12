@@ -1,117 +1,56 @@
-import React,{Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import WizardFormFirstPage from './Page1'
+import WizardFormSecondPage from './Page2'
+import WizardFormThirdPage from './Page3'
+import {  View } from 'react-native'
+class WizardForm extends Component {
+ 
+   
+    state = {
+      page: 1
+   
+  }
+  nextPage=()=> {
+    this.setState({page: this.state.page + 1})
+  }
 
-import { View } from 'react-native'
-import { connect } from 'react-redux';
+  previousPage=()=> {
+    this.setState({page: this.state.page - 1})
+  }
 
-import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base';
+  onSubmit=(values)=>{
+      console.log(values)
+  }
 
-import { Field,reduxForm  } from 'redux-form'
-import { sumbit } from './actions'
-const validate = values =>{
-    const error = {};
+  handleSubmit=(values)=>{
+      console.log(values)
+  }
 
-    error.email=''
-    error.name = ''
-    error.phone = ''
-    let ema = values.email;
-    let nm = values.name
-    let ph = values.phone
-    if(ema === 'undefined' || ema == ''){
-        error.email = 'email is required'
-    }
-
-    if(nm === 'undefined' || nm==''){
-       error.name = "name is required"
-    }
-
-    if((ema && ema.length < 8) && ema!==''){
-        error.email = 'too short'
-    }
-
-    if((ema && !ema.includes('@')) && ema !==''){
-        error.email = '@ not included'
-    }
-    if((nm && nm.length) > 8){
-        error.name = 'max 8 characters'
-    }
-
-    if((ph && ph.length<10)){
-        error.phone = 'min 10 numbers'
-    }
-
-    return error;
+  render() {
+    const {onSubmit,values} = this.props
+    console.log("props=",this.props)
+    const {page} = this.state
+    return (
+      <View style={{flex:1}}>
+        {page === 1 && <WizardFormFirstPage onSubmit={this.nextPage} />}
+        {page === 2 &&
+          <WizardFormSecondPage
+            previousPage={this.previousPage}
+            handleSubmit={this.nextPage}
+          />}
+        {page === 3 &&
+          <WizardFormThirdPage
+            previousPage={this.previousPage}
+           
+          />}
+      </View>
+    )
+  }
 }
 
-class Registration extends Component{
-    state={
-        isReady:false
-    }
-
-    renderInput = ({ value,onChange,placeholder, input,label,type,meta:{touched,error,warning}})=>{
-        let hasError = false;
-        if(error !== undefined){
-            hasError = true
-        }
-
-        return(
-            <Item  error={hasError}>
-                <Input placeholder={placeholder} {...input} keyboardType={type}  onChangeText={onChange} {...input}/>
-                {hasError ? <Text style={{color:'red',fontSize:12}}>{`*${error}`}</Text>:<Text/>}
-            </Item>
-        )
-    }
-onSubmit = (values)=>{
-    console.log(this.props.form)
-    if(Object.keys(values).length>0){
-        this.props.onSubmit(values)
-    }
-}
-    render(){
-        const { handleSubmit,reset } = this.props
-      return(
-          <Container>
-              <Header>
-                  <Body>
-                      <Title>Registration</Title>
-                  </Body>
-              </Header>
-
-              <Content padder>
-                    <Field placeholder="Enter email" name="email" type="email-address" component={this.renderInput} />
-                    <Field name="name" placeholder="Enter name"  component={this.renderInput} />
-                    <Field name="phone" type="phone-pad" placeholder="Enter phone no"  component={this.renderInput} />
-                    <Button onPress={handleSubmit(this.onSubmit)} >
-                        <Text>Submit</Text>
-                    </Button>
-                    {this.props.registration.message && <Text>{this.props.registration.message}</Text>}
-                    {this.props.form && <Text>{JSON.stringify(this.props.form.registration)}</Text>}
-                    
-              </Content>
-          </Container>
-      )
-    }
+WizardForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
 }
 
-mapStateToProps = (state)=>{
-    return{
-        registration:state.registration,
-        regForm:state.form
-    }
-}
-
-mapDispatchToProps = (dispatch)=>{
-    return{
-        onSubmit: (values)=>dispatch(sumbit(values))
-    }
-}
-
-Registration = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Registration)
-
-export default reduxForm({
-    form:'registration',
-    validate,
-    
-})(Registration)
+export default WizardForm

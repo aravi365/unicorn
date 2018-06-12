@@ -32,8 +32,8 @@ export default class ViewPager extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <IndicatorViewPager
-                    style={{ height: 200 }}
-                    indicator={this._renderDotIndicator()}
+                    style={{ height: height*0.85 }}
+                    indicator={this._renderTitleIndicator()}
                 >
                     <View style={{ backgroundColor: 'cadetblue' }}>
                         <Text>page one</Text>
@@ -45,35 +45,7 @@ export default class ViewPager extends Component {
                         <Text>page three</Text>
                     </View>
                 </IndicatorViewPager>
-                <IndicatorViewPager
-                    style={{ flex: 1, paddingTop: 20, backgroundColor: 'white' }}
-                    indicator={this._renderTitleIndicator()}
-                >
-                    <View style={{ backgroundColor: 'cadetblue' }}>
-                        <Text>page one</Text>
-                    </View>
-                    <View style={{ backgroundColor: 'cornflowerblue' }}>
-                        <Text>page two</Text>
-                    </View>
-                    <View style={{ backgroundColor: '#1AA094' }}>
-                        <Text>page three</Text>
-                    </View>
-                </IndicatorViewPager>
-
-                 <IndicatorViewPager
-                    style={{flex:1, paddingTop:20, backgroundColor:'white'}}
-                    indicator={console.log('Hi')}
-                >
-                    <View style={{backgroundColor:'cadetblue'}}>
-                        <Text>page one</Text>
-                    </View>
-                    <View style={{backgroundColor:'cornflowerblue'}}>
-                        <Text>page two</Text>
-                    </View>
-                    <View style={{backgroundColor:'#1AA094'}}>
-                        <Text>page three</Text>
-                    </View>
-                </IndicatorViewPager>
+              
             </View>
 
         );

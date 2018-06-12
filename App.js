@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import allReducers from './App/reducers'
 import { Field,reduxForm } from 'redux-form'
 import Registration from './App/Registration'
+import WizardForm from './App/Registration/index'
 const Navigator =  StackNavigator({
   Registration:{screen:Registration},
 },
@@ -20,7 +21,7 @@ export default class App extends React.Component{
   render(){
     return(
       <Provider store={store}>
-          <Registration />
+          <WizardForm />
       </Provider>
     )
   }
