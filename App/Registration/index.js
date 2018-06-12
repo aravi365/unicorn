@@ -46,7 +46,7 @@ class Registration extends Component{
         isReady:false
     }
 
-    renderInput = ({ value,onChange, input,label,type,meta:{touched,error,warning}})=>{
+    renderInput = ({ value,onChange,placeholder, input,label,type,meta:{touched,error,warning}})=>{
         let hasError = false;
         if(error !== undefined){
             hasError = true
@@ -54,7 +54,7 @@ class Registration extends Component{
 
         return(
             <Item  error={hasError}>
-                <Input {...input} keyboardType={type}  onChangeText={onChange} {...input}/>
+                <Input placeholder={placeholder} {...input} keyboardType={type}  onChangeText={onChange} {...input}/>
                 {hasError ? <Text style={{color:'red',fontSize:12}}>{`*${error}`}</Text>:<Text/>}
             </Item>
         )
@@ -75,9 +75,9 @@ onSubmit = (values)=>{
               </Header>
 
               <Content padder>
-                    <Field name="email" type="email-address" component={this.renderInput} />
-                    <Field name="name"  component={this.renderInput} />
-                    <Field name="phone" type="phone-pad"  component={this.renderInput} />
+                    <Field placeholder="Enter email" name="email" type="email-address" component={this.renderInput} />
+                    <Field name="name" placeholder="Enter name"  component={this.renderInput} />
+                    <Field name="phone" type="phone-pad" placeholder="Enter phone no"  component={this.renderInput} />
                     <Button onPress={handleSubmit(this.onSubmit)} >
                         <Text>Submit</Text>
                     </Button>
