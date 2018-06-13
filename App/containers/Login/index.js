@@ -22,41 +22,41 @@ export default class Login extends Component {
     render() {
         return (
             <Container>
-                <StatusBar backgroundColor='rgba(109, 209, 248, 0.77)'/>
+                <StatusBar backgroundColor='#61b7e5'/>
                 <Content padder style={{ backgroundColor: '#fff', }}>
-                    <View style={{ height: height / 3, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ height: height / 2.5, alignItems: 'center', justifyContent: 'center' }}>
                         <Image source={require('../../../assets/images/dummy.png')} />
                     </View>
 
                     <View style={{ flex: 1 ,alignItems:'center',justifyContent:'center'}}>
-                        <Item floatingLabel style={{ marginVertical: 20 }} >
-                            <Label>Email</Label>
-                            <Input />
+                        <Item  style={{ marginVertical: 20 }} >
+                        <Icon name='mail' style={{color:'#61b7e5'}}/>
+                           
+                            <Input   placeholder='Email' keyboardType='email-address' style={{fontFamily:'Lato-Regular'}}/>
                         </Item>
-                        <Item floatingLabel style={{}}>
-                        <Label>Password</Label>
-                            <Input />
+                        <Item  style={{}}>
+                        <Icon name='lock' style={{color:'#61b7e5'}}/>
+                       
+                            <Input  placeholder='Password' style={{fontFamily:'Lato-Regular'}} />
                         </Item>
-                        <Button block info style={{ marginVertical: 20,}}>
-                            <Text style={{ color: '#fff' }}>Login</Text>
+                        <Button block info style={styles.buttonStyle}>
+                            <Text style={{ color: '#fff',fontFamily:'Lato-Black' }}>Login</Text>
                         </Button>
 
                     </View>
                     <View style={{ flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}>
 
                         <TouchableOpacity>
-                            <Text>Forgot Password</Text>
+                            <Text style={styles.textStyle}>Forgot Password</Text>
                         </TouchableOpacity>
                         <View>
-                            <Text> | </Text>
+                            <Text style={styles.textStyle}> | </Text>
                             </View>
                         <TouchableOpacity>
-                            <Text>Register</Text>
+                            <Text style={styles.textStyle}>Register</Text>
                         </TouchableOpacity>
-                        {/* <Button transparent>
-                            <Text>Register</Text>
-                        </Button> */}
-
+                     
+            
                     </View>
                 </Content>
 
@@ -66,3 +66,15 @@ export default class Login extends Component {
 
 
 }
+const styles  = StyleSheet.create({
+  textStyle: {
+    fontFamily:'Lato-Black',
+     color:'#61b7e5'
+    },
+    buttonStyle:{
+        marginVertical: 20,
+        backgroundColor:'#61b7e5'
+
+    },
+   
+  });
