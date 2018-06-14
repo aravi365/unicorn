@@ -9,10 +9,12 @@ import { Field,reduxForm } from 'redux-form'
 import Registration from './App/Registration'
 import Login from './App/containers/Login'
 import WizardForm from './App/Registration/index'
+import { Root } from "native-base";
+
+console.disableYellowBox = true
 const Navigator =  StackNavigator({
-  Login:{screen:Login},
   Registration:{screen:WizardForm},
- 
+  Login:{screen:Login},
 },
 {
   navigationOptions:{header:null}
@@ -23,9 +25,13 @@ const store = createStore(allReducers)
 export default class App extends React.Component{
   render(){
     return(
+      <Root>
       <Provider store={store}>
+    
           <Navigator />
+       
       </Provider>
+      </Root>
     )
   }
 }

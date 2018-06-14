@@ -3,6 +3,11 @@ package com.unicorn;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
+import com.rnfs.RNFSPackage;
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -24,6 +29,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeDocumentPicker(),
+            new RNFSPackage(),
+            new ImageResizerPackage(),
+            new ImagePickerPackage(),
+            new LinearGradientPackage(),
             new VectorIconsPackage()
       );
     }

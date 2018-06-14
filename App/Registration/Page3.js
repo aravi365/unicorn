@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-
-import { View } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient';
+import { View,StyleSheet,StatusBar } from 'react-native'
 import { connect } from 'react-redux';
 
 import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base';
@@ -38,24 +38,25 @@ onSubmit = (values)=>{
         const { handleSubmit,reset } = this.props
         // console.log(this.props)
       return(
+        <LinearGradient colors={['#1ec7f6', '#4c669f',]} style={styles.linearGradient}>
           <Container>
-              <Header>
-                  <Body>
-                      <Title>Registration</Title>
-                  </Body>
-              </Header>
+          <StatusBar backgroundColor='#1ec7f6'/>
 
               <Content padder>
-                    <Field placeholder="Enter password" name="password"  component={this.renderInput} />
-                    <Field name="confirm_password" placeholder="Confirm Password"   component={this.renderInput} />
-                   
-                    <Button onPress={handleSubmit(this.onSubmit)} >
-                        <Text>Submit</Text>
+              <Item>
+                    <Input placeholder="Enter password" name="password"  component={this.renderInput} />
+                   </Item>
+                   <Item>
+                    <Input name="confirm_password" placeholder="Confirm Password"   component={this.renderInput} />
+                    </Item>
+                    <Button  block info  style={styles.buttonStyle} onPress={handleSubmit(this.onSubmit)} >
+                        <Text>Register</Text>
                     </Button>
                    
                     
               </Content>
           </Container>
+          </LinearGradient>
       )
     }
 }
@@ -71,6 +72,28 @@ Page3 = connect(
    
     mapDispatchToProps
 )(Page3)
+
+const styles = StyleSheet.create({
+    textStyle: {
+        fontFamily: 'Lato-Black',
+        color: '#fff'
+    },
+    buttonStyle: {
+        marginVertical: 20,
+        backgroundColor: '#61b7e5'
+
+    },
+    placeholderStyle:{
+        fontFamily: 'Lato-Regular', 
+        color: '#fff' 
+    },
+    linearGradient: {
+        flex: 1,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+
+});
 
 export default reduxForm({
     form:'registration',
